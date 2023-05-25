@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { HelloController } from './controllers/hello';
 import { CustomerController } from './controllers/sales/customer';
 import { ProviderController } from './controllers/sales/provider';
 import { OrderController } from './controllers/sales/order';
@@ -9,7 +10,12 @@ import { OrderService } from './services/sales/order';
 
 @Module({
   imports: [],
-  controllers: [CustomerController, ProviderController, OrderController],
+  controllers: [
+    HelloController,
+    CustomerController,
+    ProviderController,
+    OrderController,
+  ],
   providers: [PrismaService, CustomerService, ProviderService, OrderService],
 })
 export class AppModule {}
