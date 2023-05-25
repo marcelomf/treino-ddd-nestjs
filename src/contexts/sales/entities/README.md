@@ -1,0 +1,1 @@
+entities contains classes and interfaces of domain.

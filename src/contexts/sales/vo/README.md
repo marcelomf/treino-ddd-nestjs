@@ -1,0 +1,1 @@
+vo contains types and enums of domains.

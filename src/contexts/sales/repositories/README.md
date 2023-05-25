@@ -1,0 +1,1 @@
+repositories implements repository pattern, receive DTO and access DAO.

@@ -1,0 +1,85 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Address {
+  id        String    @id @default(uuid())
+  customer  Customer?  @relation(fields: [customer_id], references: [id])
+  customer_id String? 
+  provider  Provider?  @relation(fields: [provider_id], references: [id])
+  provider_id String? 
+  principal Boolean?  @default(false)
+  country   String
+  city      String
+  street    String
+  number    Int?
+  complement String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model OrderItem {
+  id        String   @id @default(uuid())
+  order     Order    @relation(fields: [order_id], references: [id])
+  order_id  String
+  name      String
+  price     Decimal
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Order {
+  id        String   @id @default(uuid())
+  items     OrderItem[]
+  total     Decimal
+  customer  Customer  @relation(fields: [customer_id], references: [id])
+  customer_id String
+  provider  Provider  @relation(fields: [provider_id], references: [id])
+  provider_id String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Customer {
+  id        String   @id @default(uuid())
+  name      String   
+  birthdate DateTime
+  genre     String
+  addresses Address[]
+  orders    Order[]
+  complaints Complaint[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Complaint {
+  id        String    @id @default(uuid())
+  customer  Customer  @relation(fields: [customer_id], references: [id])
+  customer_id String
+  provider  Provider  @relation(fields: [provider_id], references: [id])
+  provider_id String
+  content   String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Provider {
+  id        String   @id @default(uuid())
+  name      String
+  birthdate DateTime
+  addresses Address[]
+  orders    Order[]
+  complaints Complaint[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
