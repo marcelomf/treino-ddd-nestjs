@@ -7,7 +7,7 @@ import {
   Body,
   Param,
 } from '@nestjs/common';
-import { ProviderService } from '../../services/sales/provider';
+import { ProviderService } from '../../services/sales/provider.service';
 import { ProviderDTO } from 'src/contexts/sales/dto/provider';
 
 @Controller()

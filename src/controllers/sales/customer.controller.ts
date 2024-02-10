@@ -7,7 +7,7 @@ import {
   Body,
   Param,
 } from '@nestjs/common';
-import { CustomerService } from '../../services/sales/customer';
+import { CustomerService } from '../../services/sales/customer.service';
 import { CustomerDTO } from 'src/contexts/sales/dto/customer';
 
 @Controller()
